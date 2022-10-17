@@ -61,13 +61,11 @@ public class PhoneBook  {
     }
 
     public void removeDuplicate() {
+        Collections.sort(bookPhone, Comparator.comparing(Contact::getName));
         Iterator<Contact> itr = bookPhone.iterator();
-        if (itr.hasNext())
-            itr.next();
-
         while (itr.hasNext()) {
             Contact contactNext = itr.next();
-            if (itr.hasNext() && contactNext.equals(itr.next())) {
+            while (itr.hasNext() && contactNext.equals(itr.next())) {
                 System.out.println(contactNext + " removed");
                 itr.remove();
             }
@@ -76,15 +74,18 @@ public class PhoneBook  {
 
         public static void main(String[] args) {
         PhoneBook phoneBook = new PhoneBook();
+        phoneBook.addContact("golan", "66555");
         phoneBook.addContact("moshe", "434234");
         phoneBook.addContact("Amit", "3215315");
+        phoneBook.addContact("nitzan", "1222223");
         phoneBook.addContact("amir", "43223");
-        phoneBook.addContact("golan", "66555");
         phoneBook.addContact("golan", "66555");
         phoneBook.addContact("nitzan", "1222223");
         phoneBook.addContact("nitzan", "1222223");
         phoneBook.printPhoneBook();
         phoneBook.removeDuplicate();
         phoneBook.printPhoneBook();
+
+
     }
 }
